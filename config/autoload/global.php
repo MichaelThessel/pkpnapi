@@ -1,6 +1,9 @@
 <?php
 
 return array(
+    'PKPBlog' => array(
+        'blogUrl' => 'https://pkp.sfu.ca/',
+    ),
     'doctrine' => array(
         'connection' => array(
             'orm_default' => array(

@@ -2,6 +2,8 @@
 
 namespace Api;
 
+use Api\Model\PKPBlog;
+
 class Module
 {
     /**
@@ -42,12 +44,36 @@ class Module
     {
         return array(
             'factories' => array(
+
                 'Api\Controller\Api' => function($cm)
                 {
                     $sm = $cm->getServiceLocator();
-                    return new Controller\ApiController();
-                }
+                    $pkpBlog = $sm->get('PKPBlog');
+
+                    return new Controller\ApiController($pkpBlog);
+                },
+
             )
+        );
+    }
+
+    /**
+     * Get service config
+     *
+     * @return array
+     */
+    public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+
+                'PKPBlog' => function($sm)
+                {
+                    $config = $sm->get('config');
+
+                    return new PKPBlog($config['PKPBlog']['blogUrl']);
+                },
+            ),
         );
     }
 }
