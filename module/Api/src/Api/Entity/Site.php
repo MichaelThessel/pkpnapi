@@ -16,15 +16,26 @@ class Site
      * @ORM\Id
      * @ORM\Column(type="string")
      */
-    protected $uuid;
+    public $uuid;
 
     /**
      * @ORM\Column(type="string", unique=true)
      */
-    protected $baseUrl;
+    public $baseUrl;
 
     /**
      * @ORM\OneToMany(targetEntity="Api\Entity\Journal", mappedBy="site", cascade={"all"})
      */
-    protected $journals;
+    public $journals;
+
+    /**
+     * Constructor
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->journals = new ArrayCollection();
+    }
+
 }

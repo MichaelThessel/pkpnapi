@@ -41,6 +41,26 @@ class SiteDAO implements ServiceLocatorAwareInterface
     }
 
     /**
+     * Get the repository
+     *
+     * @return mixed Repository instance
+     */
+    public function getRepository()
+    {
+        return $this->repository;
+    }
+
+    /**
+     * Get the entity manager
+     *
+     * @return mixed Entiry manager instance
+     */
+    public function getEntityManager()
+    {
+        return $this->em;
+    }
+
+    /**
      * Returns a new instance
      *
      * @return mixed Instance

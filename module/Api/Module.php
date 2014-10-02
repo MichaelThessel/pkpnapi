@@ -105,6 +105,14 @@ class Module
                     return new JournalDAO($em);
                 },
             ),
+            'invokables' => array(
+                'Api\Entity\Site' => 'Api\Entity\Site',
+                'Api\Entity\Journal' => 'Api\Entity\Journal',
+            ),
+            'shared' => array(
+                'Api\Entity\Site' => false,
+                'Api\Entity\Journal' => false,
+            ),
         );
     }
 }

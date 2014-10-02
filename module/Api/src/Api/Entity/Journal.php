@@ -16,16 +16,16 @@ class Journal
      * @ORM\Id
      * @ORM\Column(type="string")
      */
-    protected $uuid;
+    public $uuid;
 
     /**
      * @ORM\Column(type="string", unique=true)
      */
-    protected $journalUrl;
+    public $journalUrl;
 
     /**
      * @ORM\ManyToOne(targetEntity="Api\Entity\Site", cascade={"persist"})
      * @ORM\JoinColumn(name="site_uuid", referencedColumnName="uuid")
      */
-    protected $site;
+    public $site;
 }

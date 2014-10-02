@@ -23,8 +23,21 @@ class ApiController extends AbstractActionController {
      */
     public function getNotificationsAction()
     {
-        $news = $this->pkpBlog->fetchNews();
+        $response = array('status' => false, 'message' => '', 'notifications' => array());
 
-        return new JsonModel(array('status' => true, 'news' => $news));
+        if ($this->request->isPost()) {
+            $postData = $this->request->getPost()->getArrayCopy();
+            $this->dataHandler->setData($postData);
+            if ($this->dataHandler->validate($response['message'])) {
+                $this->dataHandler->store();
+                $response['posts'] = $this->pkpBlog->fetchNews();
+                $response['status'] = true;
+            }
+        }
+        else {
+            $response['message'] = 'Request needs to be POST';
+        }
+
+        return new JsonModel($response);
     }
 }
