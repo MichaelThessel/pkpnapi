@@ -24,7 +24,7 @@ class PKPBlog
         $response = ClientStatic::get(
             $this->blogUrl . '/wp-json/posts'
         );
-        if ($response->getStatusCode() != '200') return false;
+        if ($response->getStatusCode() != 200) return array();
 
         $news = Decoder::decode($response->getBody());
         if (empty($news) or !array($news)) return array();
