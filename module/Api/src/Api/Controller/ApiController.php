@@ -23,13 +23,7 @@ class ApiController extends AbstractActionController {
      */
     public function getNotificationsAction()
     {
-        /*
         $news = $this->pkpBlog->fetchNews();
-        */
-
-        $this->dataHandler->store();
-
-        $news = array();
 
         return new JsonModel(array('status' => true, 'news' => $news));
     }
