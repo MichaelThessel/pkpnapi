@@ -86,7 +86,7 @@ class DataHandler
 
         $this->siteDAO->getEntityManager()->persist($site);
 
-        if (is_array($this->data['journals'])) {
+        if (isset($this->data['journals'])) {
             foreach($this->data['journals'] as $journalData) {
                 if (!($journal = $journalRepository->findOneBy(array('uuid' => $journalData['uuid'])))) {
                     $journal = $this->journalDAO->getInstance();
