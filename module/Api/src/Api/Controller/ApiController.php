@@ -30,7 +30,7 @@ class ApiController extends AbstractActionController {
             $this->dataHandler->setData(unserialize($postData['data']));
             if ($this->dataHandler->validate($response['message'])) {
                 $this->dataHandler->store();
-//                $response['posts'] = $this->pkpBlog->fetchNews();
+                $response['posts'] = $this->pkpBlog->fetchPosts();
                 $response['status'] = true;
             }
         }

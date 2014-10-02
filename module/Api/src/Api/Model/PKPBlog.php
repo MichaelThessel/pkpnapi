@@ -19,16 +19,25 @@ class PKPBlog
      *
      * @return mixed Object containing news information
      */
-    public function fetchNews()
+    public function fetchPosts()
     {
         $response = ClientStatic::get(
-            $this->blogUrl,
-            array(),
-            array('Accept' => 'application/json')
+            $this->blogUrl . '/wp-json/posts'
         );
-
         if ($response->getStatusCode() != '200') return false;
 
-        return Decoder::decode($response);
+        $news = Decoder::decode($response->getBody());
+        if (empty($news) or !array($news)) return array();
+
+        // Restructure the data
+        array_walk($news, function(&$n) {
+            $n = array(
+                'title' => $n->title,
+                'body' => $n->content,
+                'href' => $n->link,
+            );
+        });
+
+        return $news;
     }
 }
