@@ -25,7 +25,7 @@ class Site
     public $baseUrl;
 
     /**
-     * @ORM\OneToMany(targetEntity="Api\Entity\Journal", mappedBy="site", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="Api\Entity\Journal", mappedBy="site", cascade={"persist", "remove"})
      */
     public $journals;
 
