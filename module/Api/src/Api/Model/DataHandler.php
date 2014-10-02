@@ -93,7 +93,7 @@ class DataHandler
                 }
 
                 $journal->uuid = $journalData['uuid'];
-                $journal->baseUrl = $journalData['baseUrl'];
+                $journal->journalUrl = $journalData['journalUrl'];
 
                 $site->journals->add($journal);
             }
