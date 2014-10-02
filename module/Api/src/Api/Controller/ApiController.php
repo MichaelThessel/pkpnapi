@@ -5,13 +5,15 @@ namespace Api\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Api\Model\PKPBlog;
+use Api\Model\DataHandler;
 
 class ApiController extends AbstractActionController {
     protected $pkpBlog;
 
-    public function __construct(PKPBlog $pkpBlog)
+    public function __construct(PKPBlog $pkpBlog, DataHandler $dataHandler)
     {
         $this->pkpBlog = $pkpBlog;
+        $this->dataHandler = $dataHandler;
     }
 
     /**
@@ -21,7 +23,13 @@ class ApiController extends AbstractActionController {
      */
     public function getNotificationsAction()
     {
+        /*
         $news = $this->pkpBlog->fetchNews();
+        */
+
+        $this->dataHandler->store();
+
+        $news = array();
 
         return new JsonModel(array('status' => true, 'news' => $news));
     }

@@ -3,6 +3,9 @@
 namespace Api;
 
 use Api\Model\PKPBlog;
+use Api\Model\DataHandler;
+use Api\Model\DAO\SiteDAO;
+use Api\Model\DAO\JournalDAO;
 
 class Module
 {
@@ -49,8 +52,9 @@ class Module
                 {
                     $sm = $cm->getServiceLocator();
                     $pkpBlog = $sm->get('PKPBlog');
+                    $dataHandler = $sm->get('DataHandler');
 
-                    return new Controller\ApiController($pkpBlog);
+                    return new Controller\ApiController($pkpBlog, $dataHandler);
                 },
 
             )
@@ -70,8 +74,35 @@ class Module
                 'PKPBlog' => function($sm)
                 {
                     $config = $sm->get('config');
+                    $dataHandler = $sm->get('DataHandler');
 
-                    return new PKPBlog($config['PKPBlog']['blogUrl']);
+                    return new PKPBlog(
+                        $config['PKPBlog']['blogUrl'],
+                        $dataHandler
+                    );
+                },
+
+                'DataHandler' => function($sm)
+                {
+                    $em = $sm->get('doctrine.entitymanager.orm_default');
+                    $siteDAO = $sm->get('SiteDAO');
+                    $journalDAO = $sm->get('JournalDAO');
+
+                    return new DataHandler($siteDAO, $journalDAO);
+                },
+
+                'SiteDAO' => function($sm)
+                {
+                    $em = $sm->get('doctrine.entitymanager.orm_default');
+
+                    return new SiteDAO($em);
+                },
+
+                'JournalDAO' => function($sm)
+                {
+                    $em = $sm->get('doctrine.entitymanager.orm_default');
+
+                    return new JournalDAO($em);
                 },
             ),
         );

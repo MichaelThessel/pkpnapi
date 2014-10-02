@@ -1,0 +1,53 @@
+<?php
+
+namespace Api\Model\DAO;
+
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
+
+class JournalDAO implements ServiceLocatorAwareInterface
+{
+    protected $sm;
+    protected $em;
+    protected $repository;
+    protected $repositoryName = 'Api\Entity\Journal';
+
+    public function __construct ($em)
+    {
+        $this->em = $em;
+        $this->repository = $this->em->getRepository($this->repositoryName);
+    }
+
+    /**
+     * Set the service locator
+     *
+     * @param ServiceLocatorInterface $sm
+     *
+     * @return void
+     */
+    public function setServiceLocator(ServiceLocatorInterface $sm)
+    {
+        $this->sm = $sm;
+    }
+
+    /**
+     * Get the service locator
+     *
+     * @return ServiceLocator ServiceLocator instance
+     */
+    public function getServiceLocator()
+    {
+        return $this->sm;
+    }
+
+    /**
+     * Returns a new instance
+     *
+     * @return mixed Instance
+     */
+    public function getInstance()
+    {
+        // Retrieve the instance from the service manager
+        return $this->sm->get($this->repositoryName);
+    }
+}
