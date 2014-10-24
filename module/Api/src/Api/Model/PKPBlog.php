@@ -27,7 +27,7 @@ class PKPBlog
         if ($response->getStatusCode() != 200) return array();
 
         $news = Decoder::decode($response->getBody());
-        if (empty($news) or !array($news)) return array();
+        if (empty($news) || !array($news)) return array();
 
         // Restructure the data
         array_walk($news, function(&$n) {

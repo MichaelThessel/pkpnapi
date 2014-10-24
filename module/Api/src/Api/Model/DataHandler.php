@@ -44,7 +44,7 @@ class DataHandler
         }
 
         // Validate site data is set
-        if (!isset($this->data['uuid']) or !isset($this->data['baseUrl'])) {
+        if (!isset($this->data['uuid']) || !isset($this->data['baseUrl'])) {
             $message = 'Incomplete site data';
             return false;
         }
@@ -57,7 +57,7 @@ class DataHandler
             }
 
             foreach ($this->data['journals'] as $journal) {
-                if (!isset($journal['uuid']) or !isset($journal['journalUrl'])) {
+                if (!isset($journal['uuid']) || !isset($journal['journalUrl'])) {
                     $message = 'Invalid Journal data';
                     return false;
                 }
