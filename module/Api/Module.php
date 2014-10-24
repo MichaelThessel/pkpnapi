@@ -88,7 +88,6 @@ class Module
 
                 'DataHandler' => function(ServiceManager $sm)
                 {
-                    $em = $sm->get('doctrine.entitymanager.orm_default');
                     $siteDAO = $sm->get('SiteDAO');
                     $journalDAO = $sm->get('JournalDAO');
 
