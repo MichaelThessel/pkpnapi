@@ -6,6 +6,7 @@ use Api\Model\PKPBlog;
 use Api\Model\DataHandler;
 use Api\Model\DAO\SiteDAO;
 use Api\Model\DAO\JournalDAO;
+use Api\Controller\ApiController;
 
 class Module
 {
@@ -54,7 +55,7 @@ class Module
                     $pkpBlog = $sm->get('PKPBlog');
                     $dataHandler = $sm->get('DataHandler');
 
-                    return new Controller\ApiController($pkpBlog, $dataHandler);
+                    return new ApiController($pkpBlog, $dataHandler);
                 },
 
             )
