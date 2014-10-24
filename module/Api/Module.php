@@ -2,6 +2,9 @@
 
 namespace Api;
 
+use Zend\Mvc\Controller\ControllerManager;
+use Zend\ServiceManager\ServiceManager;
+
 use Api\Model\PKPBlog;
 use Api\Model\DataHandler;
 use Api\Model\DAO\SiteDAO;
@@ -49,7 +52,7 @@ class Module
         return array(
             'factories' => array(
 
-                'Api\Controller\Api' => function($cm)
+                'Api\Controller\Api' => function(ControllerManager $cm)
                 {
                     $sm = $cm->getServiceLocator();
                     $pkpBlog = $sm->get('PKPBlog');
@@ -72,7 +75,7 @@ class Module
         return array(
             'factories' => array(
 
-                'PKPBlog' => function($sm)
+                'PKPBlog' => function(ServiceManager $sm)
                 {
                     $config = $sm->get('config');
                     $dataHandler = $sm->get('DataHandler');
@@ -83,7 +86,7 @@ class Module
                     );
                 },
 
-                'DataHandler' => function($sm)
+                'DataHandler' => function(ServiceManager $sm)
                 {
                     $em = $sm->get('doctrine.entitymanager.orm_default');
                     $siteDAO = $sm->get('SiteDAO');
@@ -92,14 +95,14 @@ class Module
                     return new DataHandler($siteDAO, $journalDAO);
                 },
 
-                'SiteDAO' => function($sm)
+                'SiteDAO' => function(ServiceManager $sm)
                 {
                     $em = $sm->get('doctrine.entitymanager.orm_default');
 
                     return new SiteDAO($em);
                 },
 
-                'JournalDAO' => function($sm)
+                'JournalDAO' => function(ServiceManager $sm)
                 {
                     $em = $sm->get('doctrine.entitymanager.orm_default');
 
