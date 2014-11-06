@@ -20,7 +20,7 @@ class Site
     public $uuid;
 
     /**
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string")
      */
     public $baseUrl;
 

@@ -82,25 +82,28 @@ class DataHandler
 
         if (!($site = $siteRepository->findOneBy(array('uuid' => $this->data['uuid'])))) {
             $site = $this->siteDAO->getInstance();
+            $site->uuid = $this->data['uuid'];
+            $this->siteDAO->getEntityManager()->persist($site);
         }
 
-        $site->uuid = $this->data['uuid'];
         $site->baseUrl = $this->data['baseUrl'];
 
-        $this->siteDAO->getEntityManager()->persist($site);
+        $this->siteDAO->getEntityManager()->flush();
 
         if (isset($this->data['journals'])) {
             foreach($this->data['journals'] as $journalData) {
                 if (!($journal = $journalRepository->findOneBy(array('uuid' => $journalData['uuid'])))) {
                     $journal = $this->journalDAO->getInstance();
+                    $journal->uuid = $journalData['uuid'];
+                    $this->journalDAO->getEntityManager()->persist($journal);
                 }
 
-                $journal->uuid = $journalData['uuid'];
                 $journal->journalUrl = $journalData['journalUrl'];
 
                 if (!$site->journals->contains($journal)) {
-                    $site->journals->add($journal);
+                    $journal->site = $site;
                 }
+
             }
         }
 

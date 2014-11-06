@@ -19,13 +19,13 @@ class Journal
     public $uuid;
 
     /**
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string")
      */
     public $journalUrl;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Api\Entity\Site", cascade={"persist"})
-     * @ORM\JoinColumn(name="site_uuid", referencedColumnName="uuid")
+     * @ORM\ManyToOne(targetEntity="Api\Entity\Site", inversedBy="journals", cascade={"persist"})
+     * @ORM\JoinColumn(name="site_uuid", referencedColumnName="uuid", nullable=false)
      */
     public $site;
 }
