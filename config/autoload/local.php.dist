@@ -12,4 +12,20 @@
  */
 
 return array(
+    'PKPBlog' => array(
+        'blogUrl' => 'http://lib-wordpress.lib.sfu.ca:8083',
+    ),
+    'doctrine' => array(
+        'connection' => array(
+            'orm_default' => array(
+                'params' => array(
+                    'host' => 'localhost',
+                    'port' => '3306',
+                    'user' => '',
+                    'password' => '',
+                    'dbname' => '',
+                ),
+            ),
+        ),
+    ),
 );
