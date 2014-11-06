@@ -27,7 +27,8 @@ class ApiController extends AbstractActionController {
 
         if ($this->request->isPost()) {
             $postData = $this->request->getPost()->getArrayCopy();
-            if (isset($postData['data']) && $postData = unserialize($postData['data']) && is_array($postData)) {
+            if (isset($postData['data'])) {
+                $postData = unserialize($postData['data']);
                 $this->dataHandler->setData($postData);
                 if ($this->dataHandler->validate($response['message'])) {
                     $this->dataHandler->store();
