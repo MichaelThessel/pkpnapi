@@ -27,11 +27,16 @@ class ApiController extends AbstractActionController {
 
         if ($this->request->isPost()) {
             $postData = $this->request->getPost()->getArrayCopy();
-            $this->dataHandler->setData(unserialize($postData['data']));
-            if ($this->dataHandler->validate($response['message'])) {
-                $this->dataHandler->store();
-                $response['posts'] = $this->pkpBlog->fetchPosts();
-                $response['status'] = true;
+            if (isset($postData['data']) && $postData = unserialize($postData['data']) && is_array($postData)) {
+                $this->dataHandler->setData($postData);
+                if ($this->dataHandler->validate($response['message'])) {
+                    $this->dataHandler->store();
+                    $response['posts'] = $this->pkpBlog->fetchPosts();
+                    $response['status'] = true;
+                }
+            }
+            else {
+                $response['message'] = 'Invalid post data';
             }
         }
         else {
