@@ -98,7 +98,9 @@ class DataHandler
                 $journal->uuid = $journalData['uuid'];
                 $journal->journalUrl = $journalData['journalUrl'];
 
-                $site->journals->add($journal);
+                if (!$site->journals->contains($journal)) {
+                    $site->journals->add($journal);
+                }
             }
         }
 
