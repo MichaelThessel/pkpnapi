@@ -25,7 +25,10 @@ class DataHandler
      */
     public function setData($data)
     {
-        assert(is_array($data));
+
+        if (!is_array($data)) {
+            throw new \Exception('Data needs to be an array');
+        }
 
         $this->data = $data;
     }
