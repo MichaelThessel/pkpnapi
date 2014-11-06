@@ -13,7 +13,7 @@
 
 return array(
     'PKPBlog' => array(
-        'blogUrl' => 'http://lib-wordpress.lib.sfu.ca:8083',
+        'blogUrl' => '',
     ),
     'doctrine' => array(
         'connection' => array(
